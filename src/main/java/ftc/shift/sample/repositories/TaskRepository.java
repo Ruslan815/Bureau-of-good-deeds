@@ -4,7 +4,12 @@ import ftc.shift.sample.models.Task;
 
 import java.util.Collection;
 
+/**
+ * Интерфейс для получения данных по заданиям
+ */
+
 public interface TaskRepository {
+
     Task fetchTask(String userId, String taskId);
 
     Task updateTask(String userId, String bookId, Task task);

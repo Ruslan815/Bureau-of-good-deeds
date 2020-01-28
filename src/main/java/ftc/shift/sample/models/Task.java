@@ -47,6 +47,10 @@ public class Task {
         this.taskId = taskId;
     }
 
+    public String setTaskId() {
+        return "DefaultTaskId";
+    }
+
     public String getOwnerId() {
         return ownerId;
     }
@@ -118,6 +122,7 @@ public class Task {
     public void setTaskPicture(String taskPicture) {
         this.taskPicture = taskPicture;
     }
+
 
 }
 

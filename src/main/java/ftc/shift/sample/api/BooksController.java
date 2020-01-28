@@ -30,6 +30,7 @@ public class BooksController {
     public ResponseEntity<Book> createBook(
             @RequestHeader("userId") String userId,
             @RequestBody Book book) {
+        book.setPages(777); // на этом этапе меняю поля объекта
         Book result = service.createBook(userId, book);
         return ResponseEntity.ok(result);
     }

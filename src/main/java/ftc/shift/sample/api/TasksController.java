@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @RestController
 public class TasksController {
-    private static final String BOOKS_PATH = "/api/v001/books";
+ /*   private static final String BOOKS_PATH = "/api/v001/books";
     private BookService service;
 
     @Autowired
@@ -25,7 +25,7 @@ public class TasksController {
      * @param book   - Данные для новой книги (Название, автор, количество страниц, жанры)
      * @return Сохранённая книга с установленным {@link Book#getId()}
      */
-    @PostMapping(BOOKS_PATH)
+ /*   @PostMapping(BOOKS_PATH)
     public ResponseEntity<Book> createBook(
             @RequestHeader("userId") String userId,
             @RequestBody Book book) {
@@ -39,7 +39,7 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param bookId - Идентификатор книги
      */
-    @GetMapping(BOOKS_PATH + "/{bookId}")
+  /*  @GetMapping(BOOKS_PATH + "/{bookId}")
     public ResponseEntity<Book> readBook(
             @RequestHeader("userId") String userId,
             @PathVariable String bookId) {
@@ -54,7 +54,7 @@ public class TasksController {
      * @param bookId - Идентификатор книги, которую необходимо обновить
      * @param book   - Новые данные для книги (Название, автор, количество страниц, жанры)
      */
-    @PatchMapping(BOOKS_PATH + "/{bookId}")
+  /*  @PatchMapping(BOOKS_PATH + "/{bookId}")
     public ResponseEntity<Book> updateBook(
             @RequestHeader("userId") String userId,
             @PathVariable String bookId,
@@ -69,7 +69,7 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param bookId - Идентификатор книги, которую необходимо удалить
      */
-    @DeleteMapping(BOOKS_PATH + "/{bookId}")
+  /*  @DeleteMapping(BOOKS_PATH + "/{bookId}")
     public ResponseEntity<?> deleteBook(
             @RequestHeader("userId") String userId,
             @PathVariable String bookId) {
@@ -82,10 +82,12 @@ public class TasksController {
      *
      * @param userId - Идентификатор пользователя
      */
-    @GetMapping(BOOKS_PATH)
+   /* @GetMapping(BOOKS_PATH)
     public ResponseEntity<Collection<Book>> listBooks(
             @RequestHeader("userId") String userId) {
         Collection<Book> books = service.provideBooks(userId);
         return ResponseEntity.ok(books);
     }
+
+    */
 }
