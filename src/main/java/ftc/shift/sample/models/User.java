@@ -6,6 +6,10 @@ public class User {
 
     private String personId;
 
+    private String login;
+
+    private String password;
+
     private String name;
 
     private String balance;
@@ -21,8 +25,10 @@ public class User {
     public User() {
     }
 
-    public User(String personId, String name, String balance, String avatar, List<String> wellDoneQuestions, List<String> failedQuestions, List<String> userQuestion) {
+    public User(String personId, String login, String password, String name, String balance, String avatar, List<String> wellDoneQuestions, List<String> failedQuestions, List<String> userQuestion) {
         this.personId = personId;
+        this.login = login;
+        this.password = password;
         this.name = name;
         this.balance = balance;
         this.avatar = avatar;
@@ -34,6 +40,14 @@ public class User {
     public String getPersonId() { return personId; }
 
     public void setPersonId(String personId) { this.personId = personId; }
+
+    public String getLogin() { return login; }
+
+    public void setLogin(String login) { this.login = login; }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getName() { return name; }
 
