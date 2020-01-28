@@ -75,7 +75,5 @@ public class Book {
         return genre;
     }
 
-    public void setGenre(List<String> genre) {
-        this.genre = genre;
-    }
+    public void setGenre(List<String> genre) { this.genre = genre; }
 }
