@@ -65,7 +65,7 @@ public class User {
         return balance;
     }
 
-    private void getBalance(Integer balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 

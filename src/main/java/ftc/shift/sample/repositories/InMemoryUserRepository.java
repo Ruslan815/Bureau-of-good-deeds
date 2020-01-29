@@ -1,7 +1,6 @@
 package ftc.shift.sample.repositories;
 
 import ftc.shift.sample.exception.NotFoundException;
-import ftc.shift.sample.models.Book;
 import ftc.shift.sample.models.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
