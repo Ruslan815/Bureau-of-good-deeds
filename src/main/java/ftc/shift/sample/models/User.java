@@ -61,7 +61,7 @@ public class User {
         this.name = name;
     }
 
-    private Integer getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 

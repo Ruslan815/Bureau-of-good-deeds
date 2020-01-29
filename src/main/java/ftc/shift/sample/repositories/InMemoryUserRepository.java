@@ -22,12 +22,13 @@ public class InMemoryUserRepository implements UserRepository{
 
         userCache.put("UserA", new HashMap<>());
         userCache.get("UserA").put("1", new User("1", "login1", "password1", "name1", 50, "avatar1", "registrationDate1"));
-        userCache.get("UserA").put("2", new User("2", "login2", "password2", "name2", 1450, "avatar2", "registrationDate2"));
 
         userCache.put("UserB", new HashMap<>());
         userCache.get("UserB").put("3", new User("3", "login3", "password3", "name3", 1, "avatar3", "registrationDate3"));
 
         userCache.put("UserC", new HashMap<>());
+        userCache.get("UserC").put("2", new User("2", "login2", "password2", "name2", 1450, "avatar2", "registrationDate2"));
+
     }
 
     @Override
