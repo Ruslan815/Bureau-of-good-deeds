@@ -1,5 +1,6 @@
 package ftc.shift.sample.repositories;
 
+import ftc.shift.sample.VariableClass;
 import ftc.shift.sample.exception.NotFoundException;
 import ftc.shift.sample.models.Task;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -102,8 +103,8 @@ public class InMemoryTaskRepository implements TaskRepository {
 
         Map<String, Task> userTasks = taskCache.get(userId);
 
-        // Плохой способ генерирования случайных идентификаторов, использовать только для примеров
-        task.setTaskId(String.valueOf(System.currentTimeMillis()));
+        // способ генерирования случайных идентификаторов, использовать только для примеров
+        task.setTaskId(VariableClass.getAvailableId());
         userTasks.put(task.setTaskId(), task);
         return task;
     }

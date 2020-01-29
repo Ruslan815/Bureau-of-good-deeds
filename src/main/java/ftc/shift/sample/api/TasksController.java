@@ -1,4 +1,6 @@
+/*
 package ftc.shift.sample.api;
+
 
 import ftc.shift.sample.models.Task;
 import ftc.shift.sample.services.TaskService;
@@ -17,7 +19,7 @@ public class TasksController {
     public TasksController(TaskService service) {
         this.service = service;
     }
-
+*/
     /**
      * Добавление новой книги
      *
@@ -25,7 +27,7 @@ public class TasksController {
      * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
      * @return Сохранённая книга с установленным {@link Task#getTaskId()}
      */
-    @PostMapping(TASKS_PATH)
+  /*  @PostMapping(TASKS_PATH)
     public ResponseEntity<Task> createTask(
             @RequestHeader("userId") String userId,
             @RequestBody Task task) {
@@ -39,7 +41,7 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param taskId - Идентификатор книги
      */
-    @GetMapping(TASKS_PATH + "/{taskId}")
+ /*   @GetMapping(TASKS_PATH + "/{taskId}")
     public ResponseEntity<Task> readTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId) {
@@ -54,7 +56,7 @@ public class TasksController {
      * @param taskId - Идентификатор книги, которую необходимо обновить
      * @param task   - Новые данные для книги (Название, автор, количество страниц, жанры)
      */
-    @PatchMapping(TASKS_PATH + "/{taskId}")
+  /*  @PatchMapping(TASKS_PATH + "/{taskId}")
     public ResponseEntity<Task> updateTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId,
@@ -69,7 +71,7 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param taskId - Идентификатор книги, которую необходимо удалить
      */
-    @DeleteMapping(TASKS_PATH + "/{taskId}")
+ /*   @DeleteMapping(TASKS_PATH + "/{taskId}")
     public ResponseEntity<?> deleteTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId) {
@@ -82,7 +84,7 @@ public class TasksController {
      *
      * @param userId - Идентификатор пользователя
      */
-    @GetMapping(TASKS_PATH)
+  /*  @GetMapping(TASKS_PATH)
     public ResponseEntity<Collection<Task>> listTasks(
             @RequestHeader("userId") String userId) {
         Collection<Task> tasks = service.provideTasks(userId);
@@ -90,4 +92,7 @@ public class TasksController {
     }
 
 
+
+
 }
+        */

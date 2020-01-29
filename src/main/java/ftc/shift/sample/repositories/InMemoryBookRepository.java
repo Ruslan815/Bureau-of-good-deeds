@@ -2,6 +2,7 @@ package ftc.shift.sample.repositories;
 
 import ftc.shift.sample.exception.NotFoundException;
 import ftc.shift.sample.models.Book;
+import ftc.shift.sample.VariableClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
@@ -100,8 +101,8 @@ public class InMemoryBookRepository implements BookRepository {
 
         Map<String, Book> userBooks = bookCache.get(userId);
 
-        // Плохой способ генерирования случайных идентификаторов, использовать только для примеров
-        book.setId(String.valueOf(System.currentTimeMillis()));
+        // Плохой(good) способ генерирования случайных идентификаторов, использовать только для примеров
+        book.setId(VariableClass.getAvailableId());
         userBooks.put(book.getId(), book);
         return book;
     }

@@ -12,11 +12,14 @@ import java.util.Collection;
 @RestController
 public class BooksController {
     private static final String BOOKS_PATH = "/api/v001/books";
+    private static final String TEST_PATH = "/api/v007/tests";
     private BookService service;
+    private BookService serviceTest;
 
     @Autowired
-    public BooksController(BookService service) {
+    public BooksController(BookService service, BookService serviceTest) {
         this.service = service;
+        this.serviceTest = serviceTest;
     }
 
     /**
@@ -30,10 +33,23 @@ public class BooksController {
     public ResponseEntity<Book> createBook(
             @RequestHeader("userId") String userId,
             @RequestBody Book book) {
+        Book result = service.createBook(userId, book);
         book.setPages(777); // на этом этапе меняю поля объекта
+        book.setAuthor("ORIGINAL_BOOK");
+        return ResponseEntity.ok(result);
+    }
+/*
+    @PostMapping(BOOKS_PATH)
+    public ResponseEntity<Book> createTestBook(
+            @RequestHeader("userId") String userId,
+            @RequestBody Book book) {
+        book.setPages(1337); // на этом этапе меняю поля объекта
+        book.setAuthor("TESTBOOK");
         Book result = service.createBook(userId, book);
         return ResponseEntity.ok(result);
     }
+
+ */
 
     /**
      * Получение книги с указанным идентификатором
