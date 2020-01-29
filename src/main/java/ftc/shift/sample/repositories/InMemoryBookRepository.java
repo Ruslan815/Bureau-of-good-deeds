@@ -25,11 +25,11 @@ public class InMemoryBookRepository implements BookRepository {
         // Заполним репозиторий тестовыми данными
         // В тестовых данных существует всего 3 пользователя: UserA / UserB / UserC
 
-        bookCache.put("UserA", new HashMap<>());
+        bookCache.put("UserA", new HashMap<>()); // создаём в БД место для записи
         bookCache.get("UserA").put("1", new Book("1", "Название 1", "Автор Авторович", 12,
-                Collections.singletonList("Фантастика")));
+                Collections.singletonList("Фантастика"))); // записываем данные в запись в БД
         bookCache.get("UserA").put("2", new Book("2", "Название 2", "Автор Писателевич", 48,
-                Collections.singletonList("Детектив")));
+                Collections.singletonList("Детектив"))); // записываем данные в запись в БД
 
         bookCache.put("UserB", new HashMap<>());
         bookCache.get("UserB").put("3", new Book("3", "Название 3", "Писатель Авторович", 24,

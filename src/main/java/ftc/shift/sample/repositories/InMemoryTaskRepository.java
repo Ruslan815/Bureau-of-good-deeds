@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,105 +18,104 @@ public class InMemoryTaskRepository implements TaskRepository {
     /**
      * Ключ - имя пользователя, значение - все книги, которые есть у пользователя
      */
-    private Map<String, Map<String, Task>> bookCache = new HashMap<>();
+    private Map<String, Map<String, Task>> taskCache = new HashMap<>();
 
     public InMemoryTaskRepository() {
         // Заполним репозиторий тестовыми данными
-        // В тестовых данных существует всего 3 пользователя: UserA / UserB / UserC
+        // В тестовых данных существует всего 3 пользователя: UserJ / UserK / UserZ
 
-        bookCache.put("UserA", new HashMap<>());
-        bookCache.get("UserA").put("1", new Task("taskId", "ownerId", "performerId", "taskName",
+        taskCache.put("UserJ", new HashMap<>()); // создаём в БД место для записи
+        taskCache.get("UserJ").put("1", new Task("taskId", "ownerId", "performerId", "taskName",
+                777, "taskDescription", 1337, "creationDate",
+                "completionDate", "taskPicture")); // записываем данные в запись в БД
+
+        taskCache.put("UserK", new HashMap<>());
+        taskCache.get("UserK").put("2", new Task("taskId", "ownerId", "performerId", "taskName",
                 777, "taskDescription", 1337, "creationDate",
                 "completionDate", "taskPicture"));
-        /*
-        bookCache.get("UserA").put("2", new Task("2", "Название 2", "Автор Писателевич", 48,
-                Collections.singletonList("Детектив")));
 
-        bookCache.put("UserB", new HashMap<>());
-        bookCache.get("UserB").put("3", new Task("3", "Название 3", "Писатель Авторович", 24,
-                Collections.singletonList("Киберпанк")));
-
-        bookCache.put("UserC", new HashMap<>());
-
-         */
+        taskCache.put("UserZ", new HashMap<>());
+        taskCache.get("UserZ").put("3", new Task("taskId", "ownerId", "performerId", "taskName",
+                777, "taskDescription", 1337, "creationDate",
+                "completionDate", "taskPicture"));
     }
 
     @Override
-    public Task fetchTask(String userId, String bookId) {
-        if (!bookCache.containsKey(userId)) {
+    public Task fetchTask(String userId, String taskId) {
+        if (!taskCache.containsKey(userId)) {
             // Пользователь не найден
             throw new NotFoundException();
         }
 
-        Map<String, Task> userBooks = bookCache.get(userId);
+        Map<String, Task> userTasks = taskCache.get(userId);
 
-        if (!userBooks.containsKey(bookId)) {
+        if (!userTasks.containsKey(taskId)) {
             // У пользователя не найдена книга
             throw new NotFoundException();
         }
 
-        return userBooks.get(bookId);
+        return userTasks.get(taskId);
     }
 
     @Override
-    public Task updateTask(String userId, String bookId, Task book) {
-        if (!bookCache.containsKey(userId)) {
+    public Task updateTask(String userId, String taskId, Task task) {
+        if (!taskCache.containsKey(userId)) {
             // Пользователь не найден
             throw new NotFoundException();
         }
 
-        Map<String, Task> userBooks = bookCache.get(userId);
+        Map<String, Task> userTasks = taskCache.get(userId);
 
-        if (!userBooks.containsKey(bookId)) {
+        if (!userTasks.containsKey(taskId)) {
             // У пользователя не найдена книга
             throw new NotFoundException();
         }
 
-        book.setTaskId(bookId);
-        userBooks.put(bookId, book);
-        return book;
+        task.setTaskId(taskId);
+        userTasks.put(taskId, task);
+        return task;
     }
 
     @Override
-    public void deleteTask(String userId, String bookId) {
-        if (!bookCache.containsKey(userId)) {
+    public void deleteTask(String userId, String taskId) {
+        if (!taskCache.containsKey(userId)) {
             // Пользователь не найден
             throw new NotFoundException();
         }
 
-        Map<String, Task> userBooks = bookCache.get(userId);
+        Map<String, Task> taskBooks = taskCache.get(userId);
 
-        if (!userBooks.containsKey(bookId)) {
+        if (!taskBooks.containsKey(taskId)) {
             // У пользователя не найдена книга
             throw new NotFoundException();
         }
 
-        bookCache.remove(bookId);
+        taskCache.remove(taskId);
     }
 
     @Override
-    public Task createTask(String userId, Task book) {
-        if (!bookCache.containsKey(userId)) {
+    public Task createTask(String userId, Task task) {
+        if (!taskCache.containsKey(userId)) {
             // Пользователь не найден
             throw new NotFoundException();
         }
 
-        Map<String, Task> userBooks = bookCache.get(userId);
+        Map<String, Task> userTasks = taskCache.get(userId);
 
         // Плохой способ генерирования случайных идентификаторов, использовать только для примеров
-        book.setTaskId(String.valueOf(System.currentTimeMillis()));
-        userBooks.put(book.setTaskId(), book);
-        return book;
+        task.setTaskId(String.valueOf(System.currentTimeMillis()));
+        userTasks.put(task.setTaskId(), task);
+        return task;
     }
 
     @Override
     public Collection<Task> getAllTasks(String userId) {
-        if (!bookCache.containsKey(userId)) {
+        if (!taskCache.containsKey(userId)) {
             // Пользователь не найден
             throw new NotFoundException();
         }
 
-        return bookCache.get(userId).values();
+        return taskCache.get(userId).values();
     }
 }
 

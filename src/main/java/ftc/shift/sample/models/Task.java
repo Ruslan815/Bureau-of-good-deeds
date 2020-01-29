@@ -22,6 +22,8 @@ public class Task {
 
     private String taskPicture;
 
+    private Boolean descriptionVisible = false;
+
     public Task() {
     }
 
