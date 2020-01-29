@@ -1,7 +1,5 @@
 package ftc.shift.sample.models;
 
-import java.util.List;
-
 public class User {
 
     private String personId;
@@ -10,68 +8,82 @@ public class User {
 
     private String password;
 
+    private String registrationDate;
+
     private String name;
 
-    private String balance;
+    private Integer balance;
 
     private String avatar;
-
-    private List<String> wellDoneQuestions;
-
-    private List<String> failedQuestions;
-
-    private List<String> userQuestion;
 
     public User() {
     }
 
-    public User(String personId, String login, String password, String name, String balance, String avatar, List<String> wellDoneQuestions, List<String> failedQuestions, List<String> userQuestion) {
+    public User(String personId, String login, String password, String name, Integer balance, String avatar, String registrationDate) {
         this.personId = personId;
         this.login = login;
         this.password = password;
         this.name = name;
         this.balance = balance;
         this.avatar = avatar;
-        this.failedQuestions = failedQuestions;
-        this.wellDoneQuestions = wellDoneQuestions;
-        this.userQuestion = userQuestion;
+        this.registrationDate = registrationDate;
     }
 
-    public String getPersonId() { return personId; }
+    public String getPersonId() {
+        return personId;
+    }
 
-    public void setPersonId(String personId) { this.personId = personId; }
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
 
-    public String getLogin() { return login; }
+    public String getLogin() {
+        return login;
+    }
 
-    public void setLogin(String login) { this.login = login; }
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    private String getBalance() { return balance; }
+    private Integer getBalance() {
+        return balance;
+    }
 
-    private void getBalance(String balance) { this.balance = balance; }
+    private void getBalance(Integer balance) {
+        this.balance = balance;
+    }
 
-    public String getAvatar() { return avatar; }
+    public String getAvatar() {
+        return avatar;
+    }
 
-    public void setAvatar(String avatar) { this.avatar = avatar; }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-    public List<String> getFailedQuestions() { return getFailedQuestions(); }
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
 
-    public void setFailedQuestions(List<String> failedQuestions) { this.failedQuestions = failedQuestions; }
-
-    public List<String> getWellDoneQuestions() { return getWellDoneQuestions(); }
-
-    public void setWellDoneQuestions(List<String> wellDoneQuestions) { this.wellDoneQuestions = wellDoneQuestions; }
-
-    public List<String> getUserQuestion() { return getUserQuestion(); }
-
-    public void setUserQuestion(List<String> userQuestion) { this.userQuestion = userQuestion; }
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 }
 
 
