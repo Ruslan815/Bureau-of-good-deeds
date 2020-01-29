@@ -19,7 +19,7 @@ public class TaskExtractor implements ResultSetExtractor<List<Task>> {
         Map<String, Task> tasks = new HashMap<>();
 
         while (rs.next()) {
-            String taskId = rs.getString("BOOK_ID");
+            String taskId = rs.getString("TASK_ID");
 
             Task task;
             if (tasks.containsKey(taskId)) {
