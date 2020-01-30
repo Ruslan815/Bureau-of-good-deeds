@@ -17,9 +17,9 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User provideUser(String userId, String personId) { return userRepository.fetchUser(userId, personId); }
+    public User provideUser(String id) { return userRepository.fetchUser(id); }
 
-    public User updateUser(String userId, String personId, User user) {
+    /*public User updateUser(String id, User user) {
         return userRepository.updateUser(userId, personId, user);
     }
 
@@ -33,5 +33,5 @@ public class UserService {
 
     public Collection<User> provideUsers(String userId) {
         return userRepository.getAllUsers(userId);
-    }
+    } */
 }

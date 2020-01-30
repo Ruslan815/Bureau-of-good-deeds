@@ -2,39 +2,33 @@ package ftc.shift.sample.models;
 
 public class User {
 
-    private String personId;
-
+    private String id;
     private String login;
-
     private String password;
-
     private String registrationDate;
-
     private String name;
-
-    private Integer balance;
-
+    private int balance;
     private String avatar;
 
     public User() {
     }
 
-    public User(String personId, String login, String password, String name, Integer balance, String avatar, String registrationDate) {
-        this.personId = personId;
+    public User(String id, String login, String password, String registrationDate, String name, int balance, String avatar) {
+        this.id = id;
         this.login = login;
         this.password = password;
+        this.registrationDate = registrationDate;
         this.name = name;
         this.balance = balance;
         this.avatar = avatar;
-        this.registrationDate = registrationDate;
     }
 
-    public String getPersonId() {
-        return personId;
+    public String getId() {
+        return id;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -53,6 +47,14 @@ public class User {
         this.password = password;
     }
 
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
     public String getName() {
         return name;
     }
@@ -61,11 +63,11 @@ public class User {
         this.name = name;
     }
 
-    public Integer getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
@@ -75,14 +77,6 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public String getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
     }
 }
 

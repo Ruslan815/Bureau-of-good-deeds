@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,38 +14,54 @@ import java.util.Map;
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
 public class InMemoryUserRepository implements UserRepository{
 
-    private Map<String, Map<String, User>> userCache = new HashMap<>();
+    //private Map<String, Map<String, User>> userCache = new HashMap<>();
+
+    private User []userCache = new User[100];
 
     public InMemoryUserRepository() {
         // Заполним репозиторий тестовыми данными
         // В тестовых данных существует всего 3 пользователя: UserA / UserB / UserC
 
-        userCache.put("UserA", new HashMap<>());
-        userCache.get("UserA").put("1", new User("1", "login1", "password1", "name1", 50, "avatar1", "registrationDate1"));
-
+      //  userCache.put("UserA", new HashMap<>());
+        userCache[0] = new User("1", "login1", "password1", "registrationDate1", "name1", 50, "avatar1");
+/*
         userCache.put("UserB", new HashMap<>());
-        userCache.get("UserB").put("3", new User("3", "login3", "password3", "name3", 1, "avatar3", "registrationDate3"));
+        userCache.get("UserB").put("3", new User("2", "login2", "password2", "registrationDate2", "name2", 510, "avatar2"));
 
         userCache.put("UserC", new HashMap<>());
-        userCache.get("UserC").put("2", new User("2", "login2", "password2", "name2", 1450, "avatar2", "registrationDate2"));
-
+        userCache.get("UserC").put("2", new User("3", "login3", "password3", "registrationDate3", "name3", 5550, "avatar3"));
+*/
     }
 
     @Override
-    public User fetchUser(String userId, String personId) {
-        if (!userCache.containsKey(userId)) {
+    public User fetchUser(String id) {
+/*
+        boolean isFound = false;
+        User answer = new User();
+        for(int i = 0; i < 100; i++) {
+            if(userCache[i].getId().equals(id)) {
+                answer = userCache[i];
+                isFound = true;
+            }
+        }
+
+        if(isFound) {
+            return answer;
+        } else {
+            throw new NotFoundException();
+        }
+*/
+        User temp = new User("1", "login1", "password1", "registrationDate1", "name1", 50, "avatar1");
+        return temp;
+        /*Map<String, User> userUsers = userCache.get(id);
+
+        if (!userUsers.containsKey(id)) {
             throw new NotFoundException();
         }
 
-        Map<String, User> userUsers = userCache.get(userId);
-
-        if (!userUsers.containsKey(personId)) {
-            throw new NotFoundException();
-        }
-
-        return userUsers.get(personId);
+        return userUsers.get(id);*/
     }
-
+/*
     @Override
     public User updateUser(String userId, String personId, User user) {
         if (!userCache.containsKey(userId)) {
@@ -61,7 +76,7 @@ public class InMemoryUserRepository implements UserRepository{
             throw new NotFoundException();
         }
 
-        user.setPersonId(personId);
+        user.setId(personId);
         userUsers.put(personId, user);
         return user;
     }
@@ -93,18 +108,9 @@ public class InMemoryUserRepository implements UserRepository{
         Map<String, User> userUsers = userCache.get(userId);
 
         // Плохой способ генерирования случайных идентификаторов, использовать только для примеров
-        user.setPersonId(VariableClass.getAvailableId());
-        userUsers.put(user.getPersonId(), user);
+        user.setId(VariableClass.getAvailableId());
+        userUsers.put(user.getId(), user);
         return user;
     }
-
-    @Override
-    public Collection<User> getAllUsers(String userId) {
-        if (!userCache.containsKey(userId)) {
-            // Пользователь не найден
-            throw new NotFoundException();
-        }
-
-        return userCache.get(userId).values();
-    }
+*/
 }

@@ -5,13 +5,10 @@ import ftc.shift.sample.models.User;
 import java.util.Collection;
 
 public interface UserRepository {
-    User fetchUser(String userId, String personId);
+    User fetchUser(String id);
 
-    User updateUser(String userId, String personId, User user);
+    /*User updateUser(String id, User user);
 
-    void deleteUser(String userId, String personId);
-
-    User createUser(String userId, User user);
-
-    Collection<User> getAllUsers(String userId);
+    User createUser(String Id, User user);
+    */
 }
