@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 
 @RestController
@@ -119,7 +120,7 @@ public class TasksController {
      */
     @GetMapping(USERS_PATH)
     public ResponseEntity<User> readUser(
-            @PathVariable(required = true) String id) {
+            @RequestParam(required = true) String id) {
         User user = userService.provideUser(id);
         return ResponseEntity.ok(user);
     }

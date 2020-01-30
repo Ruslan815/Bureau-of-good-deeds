@@ -35,8 +35,8 @@ public class InMemoryUserRepository implements UserRepository{
 
     @Override
     public User fetchUser(String id) {
-
-        boolean isFound = true;
+/*
+        boolean isFound = false;
         User answer = new User();
         for(int i = 0; i < 100; i++) {
             if(userCache[i].getId().equals(id)) {
@@ -50,7 +50,9 @@ public class InMemoryUserRepository implements UserRepository{
         } else {
             throw new NotFoundException();
         }
-
+*/
+        User temp = new User("1", "login1", "password1", "registrationDate1", "name1", 50, "avatar1");
+        return temp;
         /*Map<String, User> userUsers = userCache.get(id);
 
         if (!userUsers.containsKey(id)) {
