@@ -25,8 +25,8 @@ public class InMemoryTaskRepository implements TaskRepository {
         // Заполним репозиторий тестовыми данными
         // В тестовых данных существует всего 3 пользователя: UserJ / UserK / UserZ
 
-        taskCache.put("UserA", new HashMap<>()); // создаём в БД место для записи
-        taskCache.get("UserA").put("1", new Task("taskId", "ownerId", "performerId", "taskName",
+        taskCache.put("UserZ", new HashMap<>()); // создаём в БД место для записи
+        taskCache.get("UserZ").put("1", new Task("taskId", "ownerId", "performerId", "taskName",
                 777, "taskDescription", 1337, "creationDate",
                 "completionDate", "taskPicture")); // записываем данные в запись в БД
 
@@ -35,8 +35,8 @@ public class InMemoryTaskRepository implements TaskRepository {
                 777, "taskDescription", 1337, "creationDate",
                 "completionDate", "taskPicture"));
 
-        taskCache.put("UserC", new HashMap<>());
-        taskCache.get("UserC").put("3", new Task("taskId", "ownerId", "performerId", "taskName",
+        taskCache.put("UserA", new HashMap<>());
+        taskCache.get("UserA").put("3", new Task("taskId", "ownerId", "performerId", "taskName",
                 777, "taskDescription", 1337, "creationDate",
                 "completionDate", "taskPicture"));
     }
