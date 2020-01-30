@@ -14,28 +14,26 @@ import java.util.Map;
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
 public class InMemoryUserRepository implements UserRepository{
 
-    //private Map<String, Map<String, User>> userCache = new HashMap<>();
-
     private User []userCache = new User[100];
 
     public InMemoryUserRepository() {
-        // Заполним репозиторий тестовыми данными
-        // В тестовых данных существует всего 3 пользователя: UserA / UserB / UserC
 
-      //  userCache.put("UserA", new HashMap<>());
-        userCache[0] = new User("1", "login1", "password1", "registrationDate1", "name1", 50, "avatar1");
-/*
-        userCache.put("UserB", new HashMap<>());
-        userCache.get("UserB").put("3", new User("2", "login2", "password2", "registrationDate2", "name2", 510, "avatar2"));
+        String tempStringId, tempLogin, tempPassword, tempRegistrationDate, tempName, tempAvatar;
+        for (int i = 0; i < 100; i++) {
+            tempStringId = String.valueOf(i);
+            tempLogin = "login" + i;
+            tempPassword = "password" + i;
+            tempRegistrationDate = "01-01-" + i;
+            tempName = "name" + i;
+            tempAvatar  = "someBase64CodeNumber" + i;
+            userCache[i] = new User(tempStringId, tempLogin, tempPassword, tempRegistrationDate, tempName, i, tempAvatar);
+        }
 
-        userCache.put("UserC", new HashMap<>());
-        userCache.get("UserC").put("2", new User("3", "login3", "password3", "registrationDate3", "name3", 5550, "avatar3"));
-*/
     }
 
     @Override
     public User fetchUser(String id) {
-/*
+
         boolean isFound = false;
         User answer = new User();
         for(int i = 0; i < 100; i++) {
@@ -50,16 +48,6 @@ public class InMemoryUserRepository implements UserRepository{
         } else {
             throw new NotFoundException();
         }
-*/
-        User temp = new User("1", "login1", "password1", "registrationDate1", "name1", 50, "avatar1");
-        return temp;
-        /*Map<String, User> userUsers = userCache.get(id);
-
-        if (!userUsers.containsKey(id)) {
-            throw new NotFoundException();
-        }
-
-        return userUsers.get(id);*/
     }
 /*
     @Override
