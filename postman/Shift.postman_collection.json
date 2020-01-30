@@ -35,18 +35,11 @@
 			"response": []
 		},
 		{
-			"name": "/api/v001/books/{id} (777)",
+			"name": "/api/v001/users/{id} (777)",
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "userId",
-						"value": "UserA",
-						"type": "text"
-					}
-				],
 				"url": {
-					"raw": "http://localhost:8081/api/v001/books/2",
+					"raw": "http://localhost:8081/api/v001/users?id=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -55,8 +48,8 @@
 					"path": [
 						"api",
 						"v001",
-						"books",
-						"2"
+						"users",
+						"?id=1"
 					]
 				},
 				"description": "Получение книги по id"

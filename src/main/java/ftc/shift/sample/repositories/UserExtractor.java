@@ -27,7 +27,7 @@ public class UserExtractor implements ResultSetExtractor<List<User>>{
             } else {
                 user = new User();
 
-                user.setPersonId(rs.getString("PERSON_ID"));
+                user.setId(rs.getString("PERSON_ID"));
                 user.setName(rs.getString("NAME"));
                 user.setLogin(rs.getString("LOGIN"));
                 user.setPassword(rs.getString("PASSWORD"));

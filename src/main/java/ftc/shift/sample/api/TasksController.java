@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @RestController
 public class TasksController {
-    private static final String TASKS_PATH = "/api/v001/tasks";
+  //  private static final String TASKS_PATH = "/api/v001/tasks";
     private TaskService taskService;
 
     @Autowired
@@ -28,7 +28,7 @@ public class TasksController {
      * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
      * @return Сохранённая книга с установленным {@link Task#getTaskId()}
      */
-    @PostMapping(TASKS_PATH)
+    /*@PostMapping(TASKS_PATH)
     public ResponseEntity<Task> createTask(
             @RequestHeader("userId") String userId,
             @RequestBody Task task) {
@@ -42,7 +42,7 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param taskId - Идентификатор книги
      */
-    @GetMapping(TASKS_PATH + "/{taskId}")
+    /*@GetMapping(TASKS_PATH + "/{taskId}")
     public ResponseEntity<Task> readTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId) {
@@ -57,7 +57,7 @@ public class TasksController {
      * @param taskId - Идентификатор книги, которую необходимо обновить
      * @param task   - Новые данные для книги (Название, автор, количество страниц, жанры)
      */
-    @PatchMapping(TASKS_PATH + "/{taskId}")
+    /*@PatchMapping(TASKS_PATH + "/{taskId}")
     public ResponseEntity<Task> updateTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId,
@@ -72,7 +72,7 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param taskId - Идентификатор книги, которую необходимо удалить
      */
-    @DeleteMapping(TASKS_PATH + "/{taskId}")
+    /*@DeleteMapping(TASKS_PATH + "/{taskId}")
     public ResponseEntity<?> deleteTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId) {
@@ -85,7 +85,7 @@ public class TasksController {
      *
      * @param userId - Идентификатор пользователя
      */
-    @GetMapping(TASKS_PATH)
+    /*@GetMapping(TASKS_PATH)
     public ResponseEntity<Collection<Task>> listTasks(
             @RequestHeader("userId") String userId) {
         Collection<Task> tasks = taskService.provideTasks(userId);
@@ -93,18 +93,17 @@ public class TasksController {
     }
 
     //////////////////////////////////////////////////////////////////////////////
-
+*/
     private static final String USERS_PATH = "/api/v001/users";
     private UserService userService;
 
     /**
      * Добавление новой книги
      *
-     * @param userId - Идентификатор пользователя
-     * @param user   - Данные для новой книги (Название, автор, количество страниц, жанры)
-     * @return Сохранённая книга с установленным {@link User#getPersonId()}
+     * @param id - Идентификатор пользователя
+     * @return Сохранённая книга с установленным {@link User#getId()}
      */
-    @PostMapping(USERS_PATH)
+    /*@PostMapping(USERS_PATH)
     public ResponseEntity<User> createUser(
             @RequestHeader("userId") String userId,
             @RequestBody User user) {
@@ -115,14 +114,13 @@ public class TasksController {
     /**
      * Получение книги с указанным идентификатором
      *
-     * @param userId - Идентификатор пользователя
-     * @param personId - Идентификатор книги
+     * @param id - Идентификатор пользователя
+     * @param id - Идентификатор книги
      */
-    @GetMapping(USERS_PATH + "/{personId}")
+    @GetMapping(USERS_PATH)
     public ResponseEntity<User> readUser(
-            @RequestHeader("userId") String userId,
-            @PathVariable String personId) {
-        User user = userService.provideUser(userId, personId);
+            @PathVariable(required = true) String id) {
+        User user = userService.provideUser(id);
         return ResponseEntity.ok(user);
     }
 
@@ -133,7 +131,7 @@ public class TasksController {
      * @param personId - Идентификатор книги, которую необходимо обновить
      * @param user   - Новые данные для книги (Название, автор, количество страниц, жанры)
      */
-    @PatchMapping(USERS_PATH + "/{personId}")
+    /*@PatchMapping(USERS_PATH + "/{personId}")
     public ResponseEntity<User> updateUser(
             @RequestHeader("userId") String userId,
             @PathVariable String personId,
@@ -141,31 +139,5 @@ public class TasksController {
         User updatedUser = userService.updateUser(userId, personId, user);
         return ResponseEntity.ok(updatedUser);
     }
-
-    /**
-     * Удаление существующей книги
-     *
-     * @param userId - Идентификатор пользователя
-     * @param personId - Идентификатор книги, которую необходимо удалить
-     */
-    @DeleteMapping(USERS_PATH + "/{personId}")
-    public ResponseEntity<?> deleteUser(
-            @RequestHeader("userId") String userId,
-            @PathVariable String personId) {
-        userService.deleteUser(userId, personId);
-        return ResponseEntity.ok().build();
-    }
-
-    /**
-     * Получение всех книг пользователя
-     *
-     * @param userId - Идентификатор пользователя
-     */
-    @GetMapping(USERS_PATH)
-    public ResponseEntity<Collection<User>> listUsers(
-            @RequestHeader("userId") String userId) {
-        Collection<User> users = userService.provideUsers(userId);
-        return ResponseEntity.ok(users);
-    }
-
+    */
 }
