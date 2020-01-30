@@ -10,13 +10,11 @@ import java.util.Collection;
 
 public interface TaskRepository {
 
-    Task fetchTask(String userId, String taskId);
-
+    Task fetchTask(String userId);
+/*
     Task updateTask(String userId, String bookId, Task task);
-
-    void deleteTask(String userId, String taskId);
 
     Task createTask(String userId, Task task);
 
-    Collection<Task> getAllTasks(String userId);
+ */
 }

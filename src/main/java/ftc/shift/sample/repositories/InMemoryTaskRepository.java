@@ -3,6 +3,7 @@ package ftc.shift.sample.repositories;
 import ftc.shift.sample.VariableClass;
 import ftc.shift.sample.exception.NotFoundException;
 import ftc.shift.sample.models.Task;
+import ftc.shift.sample.models.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
@@ -10,54 +11,51 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Реализиция, хранящая все данные в памяти приложения
- */
 @Repository
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
 public class InMemoryTaskRepository implements TaskRepository {
-    /**
-     * Ключ - имя пользователя, значение - все книги, которые есть у пользователя
-     */
-    private Map<String, Map<String, Task>> taskCache = new HashMap<>();
+
+    private Task[] userCache = new Task[100];
 
     public InMemoryTaskRepository() {
-        // Заполним репозиторий тестовыми данными
-        // В тестовых данных существует всего 3 пользователя: UserJ / UserK / UserZ
+        String tempTaskId, tempOwnerId, tempPerformerId, tempTaskName,
+                tempTaskDescription, tempCreationDate, tempCompletionDate, tempTaskPicture;
 
-        taskCache.put("UserZ", new HashMap<>()); // создаём в БД место для записи
-        taskCache.get("UserZ").put("1", new Task("taskId", "ownerId", "performerId", "taskName",
-                777, "taskDescription", 1337, "creationDate",
-                "completionDate", "taskPicture")); // записываем данные в запись в БД
+        for (int i = 0; i < 100; i++) {
+            tempTaskId = String.valueOf(i);
+            tempOwnerId = String.valueOf(i);
+            tempPerformerId = String.valueOf(i);
+            tempTaskName = "name" + i;
+            tempTaskDescription = "taskDescription" + i;
+            tempCreationDate = "01-01-" + i;
+            tempCompletionDate = "01-01-" + i;
+            tempTaskPicture = "taskPicture" + i;
 
-        taskCache.put("UserB", new HashMap<>());
-        taskCache.get("UserB").put("2", new Task("taskId", "ownerId", "performerId", "taskName",
-                777, "taskDescription", 1337, "creationDate",
-                "completionDate", "taskPicture"));
-
-        taskCache.put("UserA", new HashMap<>());
-        taskCache.get("UserA").put("3", new Task("taskId", "ownerId", "performerId", "taskName",
-                777, "taskDescription", 1337, "creationDate",
-                "completionDate", "taskPicture"));
+            userCache[i] = new Task(tempTaskId, tempOwnerId, tempPerformerId, tempTaskName, 1,
+                    tempTaskDescription, i, tempCreationDate, tempCompletionDate, tempTaskPicture);
+        }
     }
 
     @Override
-    public Task fetchTask(String userId, String taskId) {
-        if (!taskCache.containsKey(userId)) {
-            // Пользователь не найден
-            throw new NotFoundException();
+    public Task fetchTask(String id) {
+        boolean isFound = false;
+        Task answer = new Task();
+
+        for (int i = 0; i < 100; i++) {
+            if (userCache[i].getTaskId().equals(id)) {
+                answer = userCache[i];
+                isFound = true;
+                break;
+            }
         }
 
-        Map<String, Task> userTasks = taskCache.get(userId);
-
-        if (!userTasks.containsKey(taskId)) {
-            // У пользователя не найдена книга
+        if (isFound) {
+            return answer;
+        } else {
             throw new NotFoundException();
         }
-
-        return userTasks.get(taskId);
     }
-
+/*
     @Override
     public Task updateTask(String userId, String taskId, Task task) {
         if (!taskCache.containsKey(userId)) {
@@ -78,23 +76,6 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
-    public void deleteTask(String userId, String taskId) {
-        if (!taskCache.containsKey(userId)) {
-            // Пользователь не найден
-            throw new NotFoundException();
-        }
-
-        Map<String, Task> taskBooks = taskCache.get(userId);
-
-        if (!taskBooks.containsKey(taskId)) {
-            // У пользователя не найдена книга
-            throw new NotFoundException();
-        }
-
-        taskCache.remove(taskId);
-    }
-
-    @Override
     public Task createTask(String userId, Task task) {
         if (!taskCache.containsKey(userId)) {
             // Пользователь не найден
@@ -109,14 +90,6 @@ public class InMemoryTaskRepository implements TaskRepository {
         return task;
     }
 
-    @Override
-    public Collection<Task> getAllTasks(String userId) {
-        if (!taskCache.containsKey(userId)) {
-            // Пользователь не найден
-            throw new NotFoundException();
-        }
-
-        return taskCache.get(userId).values();
-    }
+ */
 }
 

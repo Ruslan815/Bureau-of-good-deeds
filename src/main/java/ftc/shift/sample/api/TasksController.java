@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @RestController
 public class TasksController {
-  //  private static final String TASKS_PATH = "/api/v001/tasks";
+    private static final String TASKS_PATH = "/api/v001/tasks";
     private TaskService taskService;
 
     @Autowired
@@ -25,8 +25,8 @@ public class TasksController {
     /**
      * Добавление новой книги
      *
-     * @param userId - Идентификатор пользователя
-     * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
+     /*    * @param userId - Идентификатор пользователя
+     /* * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
      * @return Сохранённая книга с установленным {@link Task#getTaskId()}
      */
     /*@PostMapping(TASKS_PATH)
@@ -43,11 +43,10 @@ public class TasksController {
      * @param userId - Идентификатор пользователя
      * @param taskId - Идентификатор книги
      */
-    /*@GetMapping(TASKS_PATH + "/{taskId}")
+    @GetMapping(TASKS_PATH)
     public ResponseEntity<Task> readTask(
-            @RequestHeader("userId") String userId,
-            @PathVariable String taskId) {
-        Task task = taskService.provideTask(userId, taskId);
+            @RequestParam(required = true) String id) {
+        Task task = taskService.provideTask(id);
         return ResponseEntity.ok(task);
     }
 
@@ -65,32 +64,6 @@ public class TasksController {
             @RequestBody Task task) {
         Task updatedTask = taskService.updateTask(userId, taskId, task);
         return ResponseEntity.ok(updatedTask);
-    }
-
-    /**
-     * Удаление существующей книги
-     *
-     * @param userId - Идентификатор пользователя
-     * @param taskId - Идентификатор книги, которую необходимо удалить
-     */
-    /*@DeleteMapping(TASKS_PATH + "/{taskId}")
-    public ResponseEntity<?> deleteTask(
-            @RequestHeader("userId") String userId,
-            @PathVariable String taskId) {
-        taskService.deleteTask(userId, taskId);
-        return ResponseEntity.ok().build();
-    }
-
-    /**
-     * Получение всех книг пользователя
-     *
-     * @param userId - Идентификатор пользователя
-     */
-    /*@GetMapping(TASKS_PATH)
-    public ResponseEntity<Collection<Task>> listTasks(
-            @RequestHeader("userId") String userId) {
-        Collection<Task> tasks = taskService.provideTasks(userId);
-        return ResponseEntity.ok(tasks);
     }
 
     //////////////////////////////////////////////////////////////////////////////

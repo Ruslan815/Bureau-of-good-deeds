@@ -12,38 +12,39 @@ import java.util.Map;
 
 @Repository
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
-public class InMemoryUserRepository implements UserRepository{
+public class InMemoryUserRepository implements UserRepository {
 
-    private User []userCache = new User[100];
+    private User[] userCache = new User[100];
 
     public InMemoryUserRepository() {
 
         String tempStringId, tempLogin, tempPassword, tempRegistrationDate, tempName, tempAvatar;
+
         for (int i = 0; i < 100; i++) {
             tempStringId = String.valueOf(i);
             tempLogin = "login" + i;
             tempPassword = "password" + i;
             tempRegistrationDate = "01-01-" + i;
             tempName = "name" + i;
-            tempAvatar  = "someBase64CodeNumber" + i;
+            tempAvatar = "someBase64CodeNumber" + i;
             userCache[i] = new User(tempStringId, tempLogin, tempPassword, tempRegistrationDate, tempName, i, tempAvatar);
         }
-
     }
 
     @Override
     public User fetchUser(String id) {
-
         boolean isFound = false;
         User answer = new User();
-        for(int i = 0; i < 100; i++) {
-            if(userCache[i].getId().equals(id)) {
+
+        for (int i = 0; i < 100; i++) {
+            if (userCache[i].getId().equals(id)) {
                 answer = userCache[i];
                 isFound = true;
+                break;
             }
         }
 
-        if(isFound) {
+        if (isFound) {
             return answer;
         } else {
             throw new NotFoundException();
