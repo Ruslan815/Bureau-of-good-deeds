@@ -2,6 +2,8 @@ package ftc.shift.sample.api;
 
 import ftc.shift.sample.models.Task;
 import ftc.shift.sample.services.TaskService;
+import ftc.shift.sample.models.User;
+import ftc.shift.sample.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +12,13 @@ import java.util.Collection;
 
 @RestController
 public class TasksController {
-    private static final String TASKS_PATH = "/api/v001/books";
-    private TaskService service;
+    private static final String TASKS_PATH = "/api/v001/tasks";
+    private TaskService taskService;
 
     @Autowired
-    public TasksController(TaskService service) {
-        this.service = service;
+    public TasksController(UserService service, TaskService service1) {
+        this.userService = service;
+        this.taskService = service1;
     }
 
     /**
@@ -29,7 +32,7 @@ public class TasksController {
     public ResponseEntity<Task> createTask(
             @RequestHeader("userId") String userId,
             @RequestBody Task task) {
-        Task result = service.createTask(userId, task);
+        Task result = taskService.createTask(userId, task);
         return ResponseEntity.ok(result);
     }
 
@@ -43,7 +46,7 @@ public class TasksController {
     public ResponseEntity<Task> readTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId) {
-        Task task = service.provideTask(userId, taskId);
+        Task task = taskService.provideTask(userId, taskId);
         return ResponseEntity.ok(task);
     }
 
@@ -59,7 +62,7 @@ public class TasksController {
             @RequestHeader("userId") String userId,
             @PathVariable String taskId,
             @RequestBody Task task) {
-        Task updatedTask = service.updateTask(userId, taskId, task);
+        Task updatedTask = taskService.updateTask(userId, taskId, task);
         return ResponseEntity.ok(updatedTask);
     }
 
@@ -73,7 +76,7 @@ public class TasksController {
     public ResponseEntity<?> deleteTask(
             @RequestHeader("userId") String userId,
             @PathVariable String taskId) {
-        service.deleteTask(userId, taskId);
+        taskService.deleteTask(userId, taskId);
         return ResponseEntity.ok().build();
     }
 
@@ -85,8 +88,84 @@ public class TasksController {
     @GetMapping(TASKS_PATH)
     public ResponseEntity<Collection<Task>> listTasks(
             @RequestHeader("userId") String userId) {
-        Collection<Task> tasks = service.provideTasks(userId);
+        Collection<Task> tasks = taskService.provideTasks(userId);
         return ResponseEntity.ok(tasks);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    private static final String USERS_PATH = "/api/v001/users";
+    private UserService userService;
+
+    /**
+     * Добавление новой книги
+     *
+     * @param userId - Идентификатор пользователя
+     * @param user   - Данные для новой книги (Название, автор, количество страниц, жанры)
+     * @return Сохранённая книга с установленным {@link User#getPersonId()}
+     */
+    @PostMapping(USERS_PATH)
+    public ResponseEntity<User> createUser(
+            @RequestHeader("userId") String userId,
+            @RequestBody User user) {
+        User result = userService.createUser(userId, user);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Получение книги с указанным идентификатором
+     *
+     * @param userId - Идентификатор пользователя
+     * @param personId - Идентификатор книги
+     */
+    @GetMapping(USERS_PATH + "/{personId}")
+    public ResponseEntity<User> readUser(
+            @RequestHeader("userId") String userId,
+            @PathVariable String personId) {
+        User user = userService.provideUser(userId, personId);
+        return ResponseEntity.ok(user);
+    }
+
+    /**
+     * Обновление существующей книги
+     *
+     * @param userId - Идентификатор пользователя
+     * @param personId - Идентификатор книги, которую необходимо обновить
+     * @param user   - Новые данные для книги (Название, автор, количество страниц, жанры)
+     */
+    @PatchMapping(USERS_PATH + "/{personId}")
+    public ResponseEntity<User> updateUser(
+            @RequestHeader("userId") String userId,
+            @PathVariable String personId,
+            @RequestBody User user) {
+        User updatedUser = userService.updateUser(userId, personId, user);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    /**
+     * Удаление существующей книги
+     *
+     * @param userId - Идентификатор пользователя
+     * @param personId - Идентификатор книги, которую необходимо удалить
+     */
+    @DeleteMapping(USERS_PATH + "/{personId}")
+    public ResponseEntity<?> deleteUser(
+            @RequestHeader("userId") String userId,
+            @PathVariable String personId) {
+        userService.deleteUser(userId, personId);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Получение всех книг пользователя
+     *
+     * @param userId - Идентификатор пользователя
+     */
+    @GetMapping(USERS_PATH)
+    public ResponseEntity<Collection<User>> listUsers(
+            @RequestHeader("userId") String userId) {
+        Collection<User> users = userService.provideUsers(userId);
+        return ResponseEntity.ok(users);
     }
 
 }

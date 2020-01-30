@@ -1,5 +1,6 @@
 package ftc.shift.sample.repositories;
 
+import ftc.shift.sample.VariableClass;
 import ftc.shift.sample.exception.NotFoundException;
 import ftc.shift.sample.models.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -92,7 +93,7 @@ public class InMemoryUserRepository implements UserRepository{
         Map<String, User> userUsers = userCache.get(userId);
 
         // Плохой способ генерирования случайных идентификаторов, использовать только для примеров
-        user.setPersonId(String.valueOf(System.currentTimeMillis()));
+        user.setPersonId(VariableClass.getAvailableId());
         userUsers.put(user.getPersonId(), user);
         return user;
     }
