@@ -8,9 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.Null;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 @ConditionalOnProperty(name = "use.database", havingValue = "false")

@@ -23,12 +23,7 @@ public class TasksController {
     }
 
     /**
-     * Добавление новой книги
-     * <p>
-     * /*    * @param userId - Идентификатор пользователя
-     * /* * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
-     *
-     * @return Сохранённая книга с установленным {@link Task#getTaskId()}
+     * Добавление нового объявления
      */
     @PostMapping(TASKS_PATH)
     public void createTask(
@@ -38,7 +33,8 @@ public class TasksController {
     }
 
     /**
-     * Получение задания с указанным id владельца и статусом задания
+     * Получение задания с указанным id владельца или статусом задания
+     * или с id выполнителя
      */
     @GetMapping(TASKS_PATH)
     public ResponseEntity<Task> readTaskStatus(
@@ -67,14 +63,9 @@ public class TasksController {
 
     private static final String USERS_PATH = "/api/v001/users";
     private UserService userService;
+/*
 
-    /**
-     * Добавление новой книги
-     *
-     * @param id - Идентификатор пользователя
-     * @return Сохранённая книга с установленным {@link User#getId()}
-     */
-    /*@PostMapping(USERS_PATH)
+    @PostMapping(USERS_PATH)
     public ResponseEntity<User> createUser(
             @RequestHeader("userId") String userId,
             @RequestBody User user) {
@@ -82,12 +73,7 @@ public class TasksController {
         return ResponseEntity.ok(result);
     }
 
-    /**
-     * Получение книги с указанным идентификатором
-     *
-     * @param id - Идентификатор пользователя
-     * @param id - Идентификатор книги
-     */
+    /*
     @GetMapping(USERS_PATH)
     public ResponseEntity<User> readUser(
             @RequestParam(required = true) String id) {
@@ -95,13 +81,6 @@ public class TasksController {
         return ResponseEntity.ok(user);
     }
 
-    /**
-     * Обновление существующей книги
-     *
-     * @param userId - Идентификатор пользователя
-     * @param personId - Идентификатор книги, которую необходимо обновить
-     * @param user   - Новые данные для книги (Название, автор, количество страниц, жанры)
-     */
     /*@PatchMapping(USERS_PATH + "/{personId}")
     public ResponseEntity<User> updateUser(
             @RequestHeader("userId") String userId,
