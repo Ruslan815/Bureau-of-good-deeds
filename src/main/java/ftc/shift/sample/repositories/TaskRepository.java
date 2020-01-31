@@ -11,7 +11,7 @@ import java.util.Collection;
 
 public interface TaskRepository {
 
-    Task fetchTask(String ownerId, Integer taskStatus);
+    ArrayList<Task> fetchTask(String ownerId, Integer taskStatus);
 
     ArrayList<Task> fetchTaskStatusAndId(Integer taskStatus, String performerId);
 

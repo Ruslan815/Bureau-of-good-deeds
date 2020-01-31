@@ -42,18 +42,16 @@ public class TasksController {
             @RequestParam(required = false) String ownerId,
             @RequestParam(required = false) Integer taskStatus,
             @RequestParam(required = false) String performerId) {
-      //  if (ownerId == null) {
+        if (ownerId == null) {
             ArrayList<Task> task = new ArrayList<>();
             task = taskService.provideTaskStatusAndId(taskStatus, performerId);
             return ResponseEntity.ok(task);
-    //    }
-        /*else {
+        }
+        else {
             ArrayList<Task> task = new ArrayList<>();
             task = taskService.provideTask(ownerId, taskStatus);
             return ResponseEntity.ok(task);
         }
-
-         */
     }
 
     /**

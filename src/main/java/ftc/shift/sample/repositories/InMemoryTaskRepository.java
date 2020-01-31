@@ -14,56 +14,37 @@ import java.util.ArrayList;
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
 public class InMemoryTaskRepository implements TaskRepository {
 
-    private Task[] userCache = new Task[150];
+    private Task[] userCache = new Task[100];
 
-    public InMemoryTaskRepository() {
-        /*
-        String tempTaskId, tempOwnerId, tempPerformerId, tempTaskName,
-                tempTaskDescription, tempCreationDate, tempCompletionDate, tempTaskPicture;
-        Integer temp;
-
-        for (int i = 0; i < 100; i++) {
-            tempTaskId = String.valueOf(i + 1);
-            tempOwnerId = String.valueOf(i);
-            tempPerformerId = String.valueOf(i + 3);
-            tempTaskName = "name" + i;
-            tempTaskDescription = "taskDescription" + i;
-            tempCreationDate = "01-01-" + i;
-            tempCompletionDate = "01-01-" + i;
-            tempTaskPicture = "taskPicture" + i;
-
-            userCache[i] = new Task(tempTaskId, tempOwnerId, tempPerformerId, tempTaskName, i,
-                    tempTaskDescription, i, tempCreationDate, tempCompletionDate, tempTaskPicture);
-        }
-
-         */
-    }
+    public InMemoryTaskRepository() {}
 
     @Override
-    public Task fetchTask(String ownerId, Integer taskStatus) {
+    public ArrayList<Task> fetchTask(String ownerId, Integer taskStatus) {
         boolean isFound = false;
         Task answer = new Task();
+
+        ArrayList<Task> array = new ArrayList();
 
         if (taskStatus == null) {
             for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getOwnerId().equals(ownerId)) {
                     answer = userCache[i];
+                    array.add(answer);
                     isFound = true;
-                    break;
                 }
             }
         } else {
             for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getOwnerId().equals(ownerId) && userCache[i].getTaskStatus().equals(taskStatus)) {
                     answer = userCache[i];
+                    array.add(answer);
                     isFound = true;
-                    break;
                 }
             }
         }
 
         if (isFound) {
-            return answer;
+            return array;
         } else {
             throw new NotFoundException();
         }
@@ -76,7 +57,6 @@ public class InMemoryTaskRepository implements TaskRepository {
 
         ArrayList<Task> array = new ArrayList();
 
-
         if (performerId == null) {
             for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getTaskStatus().equals(taskStatus)) {
@@ -86,11 +66,11 @@ public class InMemoryTaskRepository implements TaskRepository {
                 }
             }
         } else {
-            for (int i = 0; i <= Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
+            for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getTaskStatus().equals(taskStatus) && userCache[i].getPerformerId().equals(performerId)) {
                     answer = userCache[i];
+                    array.add(answer);
                     isFound = true;
-                    break;
                 }
             }
         }
@@ -102,16 +82,21 @@ public class InMemoryTaskRepository implements TaskRepository {
         }
     }
 
-
     @Override
     public void updateTask(Task task) {
         String taskId = task.getTaskId();
+        boolean isFound = false;
 
         for (int i = 0; i <= Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
             if (userCache[i].getTaskId().equals(taskId)) {
                 userCache[i] = task;
+                isFound = true;
                 break;
             }
+        }
+
+        if (!isFound) {
+            throw new NotFoundException();
         }
     }
 
@@ -120,7 +105,6 @@ public class InMemoryTaskRepository implements TaskRepository {
         task.setTaskId(VariableClass.getAvailableId());
         int elementIndex = Integer.parseInt(task.getTaskId());
         userCache[elementIndex] = task;
-
     }
 }
 

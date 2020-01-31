@@ -17,7 +17,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public Task provideTask(String ownerId, Integer taskStatus) {
+    public ArrayList<Task> provideTask(String ownerId, Integer taskStatus) {
         return taskRepository.fetchTask(ownerId, taskStatus);
     }
 
