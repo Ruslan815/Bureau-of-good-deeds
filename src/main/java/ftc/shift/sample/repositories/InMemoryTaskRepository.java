@@ -44,7 +44,7 @@ public class InMemoryTaskRepository implements TaskRepository {
         Task answer = new Task();
 
         if (taskStatus == null) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getOwnerId().equals(ownerId)) {
                     answer = userCache[i];
                     isFound = true;
@@ -52,7 +52,7 @@ public class InMemoryTaskRepository implements TaskRepository {
                 }
             }
         } else {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getOwnerId().equals(ownerId) && userCache[i].getTaskStatus().equals(taskStatus)) {
                     answer = userCache[i];
                     isFound = true;
@@ -74,7 +74,7 @@ public class InMemoryTaskRepository implements TaskRepository {
         Task answer = new Task();
 
         if (performerId == null) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i <= Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getTaskStatus().equals(taskStatus)) {
                     answer = userCache[i];
                     isFound = true;
@@ -82,7 +82,7 @@ public class InMemoryTaskRepository implements TaskRepository {
                 }
             }
         } else {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i <= Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getTaskStatus().equals(taskStatus) && userCache[i].getPerformerId().equals(performerId)) {
                     answer = userCache[i];
                     isFound = true;
@@ -98,26 +98,19 @@ public class InMemoryTaskRepository implements TaskRepository {
         }
     }
 
-    /*
-        @Override
-        public Task updateTask(String userId, String taskId, Task task) {
-            if (!taskCache.containsKey(userId)) {
-                // Пользователь не найден
-                throw new NotFoundException();
+
+    @Override
+    public void updateTask(Task task) {
+        String taskId = task.getTaskId();
+
+        for (int i = 0; i <= Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
+            if (userCache[i].getTaskId().equals(taskId)) {
+                userCache[i] = task;
+                break;
             }
-
-            Map<String, Task> userTasks = taskCache.get(userId);
-
-            if (!userTasks.containsKey(taskId)) {
-                // У пользователя не найдена книга
-                throw new NotFoundException();
-            }
-
-            task.setTaskId(taskId);
-            userTasks.put(taskId, task);
-            return task;
         }
-    */
+    }
+
     @Override
     public void createTask(Task task) {
         task.setTaskId(VariableClass.getAvailableId());

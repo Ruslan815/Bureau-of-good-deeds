@@ -23,11 +23,11 @@ public class TaskService {
     public Task provideTaskStatusAndId(Integer taskStatus, String performerId) {
         return taskRepository.fetchTaskStatusAndId(taskStatus, performerId);
     }
-/*
-    public Task updateTask(String userId, String taskId, Task task) {
-        return taskRepository.updateTask(userId, taskId, task);
+
+    public void updateTask(Task task) {
+        taskRepository.updateTask(task);
     }
-*/
+
     public void createTask(Task task) {
         taskRepository.createTask(task);
     }

@@ -34,7 +34,7 @@ public class TasksController {
     public void createTask(
             @RequestBody Task task) {
         taskService.createTask(task);
-     //   return ResponseEntity.ok();
+        //   return ResponseEntity.ok();
     }
 
     /**
@@ -56,22 +56,15 @@ public class TasksController {
 
     /**
      * Обновление существующей книги
-     *
-     * @param userId - Идентификатор пользователя
-     * @param taskId - Идентификатор книги, которую необходимо обновить
-     * @param task   - Новые данные для книги (Название, автор, количество страниц, жанры)
      */
-    /*@PatchMapping(TASKS_PATH + "/{taskId}")
-    public ResponseEntity<Task> updateTask(
-            @RequestHeader("userId") String userId,
-            @PathVariable String taskId,
+    @PatchMapping(TASKS_PATH)
+    public void updateTask(
             @RequestBody Task task) {
-        Task updatedTask = taskService.updateTask(userId, taskId, task);
-        return ResponseEntity.ok(updatedTask);
+        taskService.updateTask(task);
     }
 
     //////////////////////////////////////////////////////////////////////////////
-*/
+
     private static final String USERS_PATH = "/api/v001/users";
     private UserService userService;
 

@@ -7,4 +7,8 @@ public class VariableClass {
     public static String getAvailableId(){
         return String.valueOf(id++);
     }
+
+    public static String getAvailableIdNonIncrement(){
+        return String.valueOf(id);
+    }
 }
