@@ -24,9 +24,10 @@ public class TasksController {
 
     /**
      * Добавление новой книги
+     * <p>
+     * /*    * @param userId - Идентификатор пользователя
+     * /* * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
      *
-     /*    * @param userId - Идентификатор пользователя
-     /* * @param task   - Данные для новой книги (Название, автор, количество страниц, жанры)
      * @return Сохранённая книга с установленным {@link Task#getTaskId()}
      */
     /*@PostMapping(TASKS_PATH)
@@ -38,15 +39,30 @@ public class TasksController {
     }
 
     /**
-     * Получение книги с указанным идентификатором
-     *
-     * @param userId - Идентификатор пользователя
-     * @param taskId - Идентификатор книги
+     * Получение задания с указанным id владельца и статусом задания
      */
     @GetMapping(TASKS_PATH)
-    public ResponseEntity<Task> readTask(
-            @RequestParam(required = true) String id) {
-        Task task = taskService.provideTask(id);
+    public ResponseEntity<Task> readTaskStatus(
+            @RequestParam(required = false) String ownerId,
+            @RequestParam(required = false) Integer taskStatus,
+            @RequestParam(required = false) String performerId) {
+        if (ownerId == null) {
+            Task task = taskService.provideTaskStatusAndId(taskStatus, performerId);
+            return ResponseEntity.ok(task);
+        } else {
+            Task task = taskService.provideTask(ownerId, taskStatus);
+            return ResponseEntity.ok(task);
+        }
+    }
+
+    /**
+     * Получение задания с указанным статусом задания id выполнителя
+     */
+ /*   @GetMapping(TASKS_PATH)
+    public ResponseEntity<Task> readTaskStatus(
+            @RequestParam(required = false) Integer taskStatus,
+            @RequestParam(required = false) String performerId) {
+        Task task = taskService.provideTaskStatusAndId(taskStatus, performerId);
         return ResponseEntity.ok(task);
     }
 

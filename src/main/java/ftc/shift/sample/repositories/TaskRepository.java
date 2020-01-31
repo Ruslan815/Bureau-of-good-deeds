@@ -10,7 +10,9 @@ import java.util.Collection;
 
 public interface TaskRepository {
 
-    Task fetchTask(String userId);
+    Task fetchTask(String ownerId, Integer taskStatus);
+
+    Task fetchTaskStatusAndId(Integer taskStatus, String performerId);
 /*
     Task updateTask(String userId, String bookId, Task task);
 
