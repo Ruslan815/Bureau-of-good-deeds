@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.Null;
+import java.util.ArrayList;
 
 @Repository
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
@@ -16,6 +17,7 @@ public class InMemoryTaskRepository implements TaskRepository {
     private Task[] userCache = new Task[150];
 
     public InMemoryTaskRepository() {
+        /*
         String tempTaskId, tempOwnerId, tempPerformerId, tempTaskName,
                 tempTaskDescription, tempCreationDate, tempCompletionDate, tempTaskPicture;
         Integer temp;
@@ -33,6 +35,8 @@ public class InMemoryTaskRepository implements TaskRepository {
             userCache[i] = new Task(tempTaskId, tempOwnerId, tempPerformerId, tempTaskName, i,
                     tempTaskDescription, i, tempCreationDate, tempCompletionDate, tempTaskPicture);
         }
+
+         */
     }
 
     @Override
@@ -66,16 +70,19 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
-    public Task fetchTaskStatusAndId(Integer taskStatus, String performerId) {
+    public ArrayList<Task> fetchTaskStatusAndId(Integer taskStatus, String performerId) {
         boolean isFound = false;
         Task answer = new Task();
 
+        ArrayList<Task> array = new ArrayList();
+
+
         if (performerId == null) {
-            for (int i = 0; i <= Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
+            for (int i = 0; i < Integer.parseInt(VariableClass.getAvailableIdNonIncrement()); i++) {
                 if (userCache[i].getTaskStatus().equals(taskStatus)) {
                     answer = userCache[i];
+                    array.add(answer);
                     isFound = true;
-                    break;
                 }
             }
         } else {
@@ -89,7 +96,7 @@ public class InMemoryTaskRepository implements TaskRepository {
         }
 
         if (isFound) {
-            return answer;
+            return array;
         } else {
             throw new NotFoundException();
         }

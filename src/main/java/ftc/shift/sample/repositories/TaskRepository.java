@@ -2,6 +2,7 @@ package ftc.shift.sample.repositories;
 
 import ftc.shift.sample.models.Task;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -12,7 +13,7 @@ public interface TaskRepository {
 
     Task fetchTask(String ownerId, Integer taskStatus);
 
-    Task fetchTaskStatusAndId(Integer taskStatus, String performerId);
+    ArrayList<Task> fetchTaskStatusAndId(Integer taskStatus, String performerId);
 
     void updateTask(Task task);
 

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
@@ -37,17 +38,22 @@ public class TasksController {
      * или с id выполнителя
      */
     @GetMapping(TASKS_PATH)
-    public ResponseEntity<Task> readTaskStatus(
+    public ResponseEntity<ArrayList<Task>> readTaskStatus(
             @RequestParam(required = false) String ownerId,
             @RequestParam(required = false) Integer taskStatus,
             @RequestParam(required = false) String performerId) {
-        if (ownerId == null) {
-            Task task = taskService.provideTaskStatusAndId(taskStatus, performerId);
+      //  if (ownerId == null) {
+            ArrayList<Task> task = new ArrayList<>();
+            task = taskService.provideTaskStatusAndId(taskStatus, performerId);
             return ResponseEntity.ok(task);
-        } else {
-            Task task = taskService.provideTask(ownerId, taskStatus);
+    //    }
+        /*else {
+            ArrayList<Task> task = new ArrayList<>();
+            task = taskService.provideTask(ownerId, taskStatus);
             return ResponseEntity.ok(task);
         }
+
+         */
     }
 
     /**

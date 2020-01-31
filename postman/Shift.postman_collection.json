@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "/api/v001/tasks?ownerId=ownerId&taskStatus=1",
+			"name": "/api/v001/tasks?ownerId=1&taskStatus=1",
 			"request": {
 				"method": "GET",
 				"url": {
