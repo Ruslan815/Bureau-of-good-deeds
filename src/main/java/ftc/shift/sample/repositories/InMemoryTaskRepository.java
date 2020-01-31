@@ -16,7 +16,7 @@ import java.util.Map;
 @ConditionalOnProperty(name = "use.database", havingValue = "false")
 public class InMemoryTaskRepository implements TaskRepository {
 
-    private Task[] userCache = new Task[100];
+    private Task[] userCache = new Task[150];
 
     public InMemoryTaskRepository() {
         String tempTaskId, tempOwnerId, tempPerformerId, tempTaskName,
@@ -97,41 +97,33 @@ public class InMemoryTaskRepository implements TaskRepository {
             throw new NotFoundException();
         }
     }
-/*
+
+    /*
+        @Override
+        public Task updateTask(String userId, String taskId, Task task) {
+            if (!taskCache.containsKey(userId)) {
+                // Пользователь не найден
+                throw new NotFoundException();
+            }
+
+            Map<String, Task> userTasks = taskCache.get(userId);
+
+            if (!userTasks.containsKey(taskId)) {
+                // У пользователя не найдена книга
+                throw new NotFoundException();
+            }
+
+            task.setTaskId(taskId);
+            userTasks.put(taskId, task);
+            return task;
+        }
+    */
     @Override
-    public Task updateTask(String userId, String taskId, Task task) {
-        if (!taskCache.containsKey(userId)) {
-            // Пользователь не найден
-            throw new NotFoundException();
-        }
-
-        Map<String, Task> userTasks = taskCache.get(userId);
-
-        if (!userTasks.containsKey(taskId)) {
-            // У пользователя не найдена книга
-            throw new NotFoundException();
-        }
-
-        task.setTaskId(taskId);
-        userTasks.put(taskId, task);
-        return task;
-    }
-
-    @Override
-    public Task createTask(String userId, Task task) {
-        if (!taskCache.containsKey(userId)) {
-            // Пользователь не найден
-            throw new NotFoundException();
-        }
-
-        Map<String, Task> userTasks = taskCache.get(userId);
-
-        // способ генерирования случайных идентификаторов, использовать только для примеров
+    public void createTask(Task task) {
         task.setTaskId(VariableClass.getAvailableId());
-        userTasks.put(task.setTaskId(), task);
-        return task;
-    }
+        int elementIndex = Integer.parseInt(task.getTaskId());
+        userCache[elementIndex] = task;
 
- */
+    }
 }
 

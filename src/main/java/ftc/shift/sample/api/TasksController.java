@@ -30,12 +30,11 @@ public class TasksController {
      *
      * @return Сохранённая книга с установленным {@link Task#getTaskId()}
      */
-    /*@PostMapping(TASKS_PATH)
-    public ResponseEntity<Task> createTask(
-            @RequestHeader("userId") String userId,
+    @PostMapping(TASKS_PATH)
+    public void createTask(
             @RequestBody Task task) {
-        Task result = taskService.createTask(userId, task);
-        return ResponseEntity.ok(result);
+        taskService.createTask(task);
+     //   return ResponseEntity.ok();
     }
 
     /**
@@ -53,17 +52,6 @@ public class TasksController {
             Task task = taskService.provideTask(ownerId, taskStatus);
             return ResponseEntity.ok(task);
         }
-    }
-
-    /**
-     * Получение задания с указанным статусом задания id выполнителя
-     */
- /*   @GetMapping(TASKS_PATH)
-    public ResponseEntity<Task> readTaskStatus(
-            @RequestParam(required = false) Integer taskStatus,
-            @RequestParam(required = false) String performerId) {
-        Task task = taskService.provideTaskStatusAndId(taskStatus, performerId);
-        return ResponseEntity.ok(task);
     }
 
     /**

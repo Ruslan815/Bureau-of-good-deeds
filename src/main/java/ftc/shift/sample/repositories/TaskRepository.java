@@ -15,8 +15,8 @@ public interface TaskRepository {
     Task fetchTaskStatusAndId(Integer taskStatus, String performerId);
 /*
     Task updateTask(String userId, String bookId, Task task);
+*/
+    void createTask(Task task);
 
-    Task createTask(String userId, Task task);
 
- */
 }
